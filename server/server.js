@@ -1,50 +1,38 @@
+// INICIO...conectarme a requerimientos de bibliotecas internas
+
 require('./config/config');
+
+
+// para conectarme a requerimientos de bibliotecas externas
 
 const express = require('express');
 const app = express();
-
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-// MIDLEWEARS
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// parse application/json
-app.use(bodyParser.json());
 
 
-app.get('/usuario', function(req, res) {
-    res.json('get Usuario');
-});
-app.post('/usuario', function(req, res) {
+// BEGIN MIDLEWEARS// interponga en las comunicaciones, 
 
-    let body = req.body;
+app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
 
-    if (body.nombre === undefined) {
+app.use(bodyParser.json()); // parse application/json
 
-        res.status(400).json({
-            ok: false,
-            mensaje: 'El nombre es necesario'
-        });
-    } else {
-        res.json({
-            persona: body
-        });
-    }
+app.use(require('./routes/usuario')); // ... A CARPETA ROUTES!/DICE QUE LAS RUTAS ESTAN EN LA CARPETA './ROUTES'
 
+// END MIDLEWEARS
+
+
+
+// ME CONECTO A LA BASE DE DATOS
+
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true }, (err, res) => {
+
+    if (err) throw err;
+    console.log('Base de datos ONLINE');
 });
 
-app.put('/usuario/:id', function(req, res) {
+mongoose.set('useCreateIndex', true);
 
-    let id = req.params.id;
-
-    res.json({
-        id
-    });
-});
-app.delete('/usuario', function(req, res) {
-    res.json('delete Usuario');
-});
-
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, () => { // Me quedo escuchando el puerto 80!
     console.log(`Escuchando puerto: ${process.env.PORT}.`);
 });

@@ -11,6 +11,10 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "express": "^4.16.4"
+        "bcrypt": "^3.0.5",
+        "express": "^4.16.4",
+        "mongoose": "^5.4.19",
+        "mongoose-unique-validator": "^2.0.2",
+        "underscore": "^1.9.1"
     }
 }
