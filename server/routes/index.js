@@ -6,6 +6,7 @@ app.use(require('./usuario')); // ... A CARPETA ROUTES!/DICE QUE LAS RUTAS ESTAN
 
 app.use(require('./login')); // ... A CARPETA ROUTES!/DICE QUE LAS RUTAS ESTAN EN LA CARPETA './ROUTES'
 
+// app.use(require('./google')); // ... A CARPETA ROUTES!/DICE QUE LAS RUTAS ESTAN EN LA CARPETA './ROUTES'
 
 
 module.exports = app;
