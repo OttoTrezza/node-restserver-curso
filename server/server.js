@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-
 
 app.use(bodyParser.json()); // parse application/json
 
-app.use(require('./routes/usuario')); // ... A CARPETA ROUTES!/DICE QUE LAS RUTAS ESTAN EN LA CARPETA './ROUTES'
+app.use(require('./routes/index')); // ...**CONFIGURACION GLOBAL DE RUTAS**/DICE QUE LAS RUTAS ESTAN EN LA CARPETA './ROUTES/INDEX.JS'
 
 // END MIDLEWEARS
 
