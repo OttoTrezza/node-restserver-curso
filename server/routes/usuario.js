@@ -4,7 +4,7 @@ const express = require('express');
 const Usuario = require('../models/usuario');
 const bcrypt = require('bcrypt');
 const app = express();
-const _ = require('underscore');
+const _ = require('underscore'); // para el __.pick linea:93 || metodo PUT
 const { verificaToken, verificaAdmin_Role } = require('../middlewares/autenticacion');
 
 //////PETICIONES///////
@@ -94,7 +94,6 @@ app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
 
     Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, usuarioDB) => {
 
-
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -156,7 +155,7 @@ app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
     let cambiaEstado = {
         estado: false
     };
-    Usuario.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, usuarioActualizado) => {
+    Usuario.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, usuarioBorrado) => {
 
         if (err) {
             return res.status(400).json({
@@ -166,7 +165,7 @@ app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
                 }
             });
         }
-        if (!usuarioActualizado) {
+        if (!usuarioBorrado) {
             return res.status(400).json({
                 ok: false,
                 err: {
@@ -176,8 +175,8 @@ app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
         }
         res.json({
             ok: true,
-            usuario: usuarioActualizado,
-            message: `El usuario ${usuarioActualizado.nombre} ha sido eliminado por ${TokenUser.nombre}`
+            usuario: usuarioBorrado,
+            message: `El usuario ${usuarioBorrado.nombre} ha sido eliminado por ${TokenUser.nombre}`
         });
 
     });
