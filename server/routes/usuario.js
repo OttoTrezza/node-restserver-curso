@@ -28,7 +28,7 @@ app.get('/usuario', verificaToken, (req, res) => {
     let desde = req.query.desde || 0;
     desde = Number(desde);
 
-    let limite = req.query.limite || 10;
+    let limite = req.query.limite || 5;
     limite = Number(limite);
 
     Usuario.find({ estado: true }, 'nombre email role estado google img')
@@ -42,11 +42,17 @@ app.get('/usuario', verificaToken, (req, res) => {
                     err
                 });
             }
+            let muestro;
             Usuario.countDocuments({ estado: true }, (err, conteo) => {
+                if ((limite - desde) >= conteo) {
+                    muestro = conteo;
+                } else {
+                    muestro = limite - desde;
+                }
                 res.json({
                     ok: true,
                     usuarios,
-                    cuantos: conteo
+                    Mostando: ` ${muestro} de ${conteo} usuarios disponibles`
                 });
 
             });

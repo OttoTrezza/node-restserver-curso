@@ -33,11 +33,17 @@ app.get('/producto', verificaToken, (req, res) => {
                     err
                 });
             }
+            let muestro;
             Producto.countDocuments({ disponible: true }, (err, conteo) => {
+                if ((limite - desde) >= conteo) {
+                    muestro = conteo;
+                } else {
+                    muestro = limite - desde;
+                }
                 res.json({
                     ok: true,
                     producto,
-                    Mostando: ` ${limite - desde} de ${conteo} productos disponibles`
+                    Mostando: ` ${muestro} de ${conteo} productos disponibles`
                 });
 
             });
