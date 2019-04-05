@@ -10,6 +10,11 @@ app.use(require('./categoria')); // ... A CARPETA ROUTES!/DICE QUE LAS RUTAS EST
 
 app.use(require('./producto')); // ... A CARPETA ROUTES!/DICE QUE LAS RUTAS ESTAN EN LA CARPETA './ROUTES'
 
+app.use(require('./upload')); // ... A CARPETA ROUTES!/DICE QUE LAS RUTAS ESTAN EN LA CARPETA './ROUTES'
+
+app.use(require('./imagenes')); // ... A CARPETA ROUTES!/DICE QUE LAS RUTAS ESTAN EN LA CARPETA './ROUTES'
+
+
 // app.use(require('./google')); // ... A CARPETA ROUTES!/DICE QUE LAS RUTAS ESTAN EN LA CARPETA './ROUTES'
 
 
